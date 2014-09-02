@@ -1,0 +1,313 @@
+% @Author: Athul Vijayan
+% @Date:   2014-08-18 10:21:31
+% @Last Modified by:   Athul Vijayan
+% @Last Modified time: 2014-08-19 15:55:13
+
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=R,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+\newcommand{\HRule}{\rule{\linewidth}{0.2mm}} % Defines a new command for the horizontal lines, change thickness here
+\begin{document}
+
+\begin{titlepage}
+    \center % Center everything on the page
+     
+    %----------------------------------------------------------------------------------------
+    %   HEADING SECTIONS
+    %----------------------------------------------------------------------------------------
+
+    \textsc{\LARGE Indian Institute of Technology, Madras}\\[1.5cm] % Name of your university/college
+    \textsc{\Large Time series analysis}\\[0.5cm] % Major heading such as course name
+    \textsc{\large CH5350}\\[0.5cm] % Minor heading such as course title
+
+    %----------------------------------------------------------------------------------------
+    %   TITLE SECTION
+    %----------------------------------------------------------------------------------------
+
+    \HRule \\[0.4cm]
+    { \huge \bfseries Tutorial 1}\\[0.4cm] % Title of your document
+    \HRule \\[1.5cm]
+     
+    %----------------------------------------------------------------------------------------
+    %   AUTHOR SECTION
+    %----------------------------------------------------------------------------------------
+
+    \Large \emph{Submitted by:}\\
+    Athul Vijayan % Your name
+
+    ED11B004\\[8cm] % Your name
+    %----------------------------------------------------------------------------------------
+    %   DATE SECTION
+    %----------------------------------------------------------------------------------------
+    {\large \today}\\[6cm] % Date, change the \today to a set date if you want to be precise
+    \vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+
+
+\section{Solutions}
+\subsection{Problem 1} % (fold)
+\label{sub:problem_1}
+\begin{enumerate}[(a)]
+    \item The probabilty distribution functions for month July and January is defined as a normal distribution with given $\mu$ and $\sigma$. The PDF of gaussian distribution is defined as:\\
+    \centerline{$f(T) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(T-\mu)^2}{2\sigma ^2}}$\\}
+        \begin{enumerate}[(i)]
+        \item
+            \begin{enumerate}[]
+                \item For month July:\\
+                $P_{r}(25\leq T \leq 37) = \int\limits_{25}^{37} \frac{1}{4.2 \sqrt{2 \pi}}e^{-\frac{(T-31.5)^2}{2*4.2^2}} \mathrm{d} T$\\
+                Which gives\\
+                $(P_{r}(25\leq T \leq 37))_{July} = 0.843964$\\
+                \item For month January:\\
+                $P_{r}(25\leq T \leq 37) = \int\limits_{25}^{37} \frac{1}{3.2 \sqrt{2 \pi}}e^{-\frac{(T-22.4)^2}{2*3.2^2}} \mathrm{d} T$\\
+                Which gives\\
+                $(P_{r}(25\leq T \leq 37))_{January} = 0.20825$\\
+            \end{enumerate}
+        \item 
+            $P_{r}(T>25) = \int\limits_{25}^{\infty} \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(T-\mu)^2}{2\sigma ^2}} \mathrm{d} T$\\
+            \begin{enumerate}[]
+                \item For month July:\\
+                $P_{r}(T>25) = \int\limits_{25}^{\infty} \frac{1}{4.2 \sqrt{2 \pi}}e^{-\frac{(T-31.5)^2}{2*4.2^2}} \mathrm{d} T$\\
+                Which gives\\
+                $(P_{r}(T>25))_{July} = 0.939143$\\
+                \item For month January:\\
+                $P_{r}(T>25) = \int\limits_{25}^{\infty} \frac{1}{3.2 \sqrt{2 \pi}}e^{-\frac{(T-22.4)^2}{2*3.2^2}} \mathrm{d} T$\\
+                Which gives\\
+                $(P_{r}(T>25))_{January} = 0.208252$\\ 
+            \end{enumerate}
+        \end{enumerate}
+    \item Real life quantities that best fit into each of given distribution are
+    \begin{enumerate}[(i)]
+        \item Normal Distribution
+        \begin{itemize}
+            \item IQ scores
+            \item Heights of males/females
+            \item Body temperatures
+        \end{itemize}
+        \newpage
+        \item Poisson Distribution
+        \begin{itemize}
+            \item number of typing errors on a page
+            \item rare diseases (like Leukemia, but not AIDS because it is infectious and so not independent) - especially in legal cases
+            \item The number of deaths per year in a given age group.
+        \end{itemize}
+        \item Exponential Distribution
+        \begin{itemize}
+            \item The time until a radioactive particle decays, or the time between clicks of a geiger counter
+            \item The time it takes before your next telephone call
+            \item The time until default (on payment to company debt holders) in reduced form credit risk modeling
+        \end{itemize}
+    \end{enumerate}
+    \item 
+\end{enumerate}
+\subsection{Problem 2} % (fold)
+\label{sub:problem_2}
+$f(x, y) = 
+\begin{cases}
+    K(x^2+y^2) &\text{ if } 0<x<2, 0<y<2\\
+    0 &\text{ elsewhere }
+\end{cases}$
+\begin{enumerate}[(i)]
+    \item By axiom of probability $P(\Omega) = 1$ where $\Omega$ is the sample space.\\
+    \begin{align}
+    \int \limits_{-\infty}^{+\infty} \int \limits_{-\infty}^{+\infty} f(x,y) \mathrm{d} x \mathrm{d} y = 1\\ \nonumber
+    \int \limits_{0}^{2} \int \limits_{0}^{2} K(x^2+y^2) \mathrm{d} x \mathrm{d} y = 1\\ \nonumber
+    \int \limits_{0}^{2} K[(\frac{x^3}{3}+y^2x)]_0^2 \mathrm{d} y = 1\\ \nonumber
+    \Longrightarrow K = \frac{3}{32} \nonumber
+    \end{align}
+
+    \item Marginal density is defined as :\\
+    \centerline{$P_{X}(x) =  \int \limits_{y} f(x, y) \mathrm{d} y$}\\
+    Which gives us:\\
+    \begin{align}
+        P_{X}(x) =  \int \limits_{0}^{2} K(x^2+ y^2) \mathrm{d} y \\\nonumber
+        \Longrightarrow P_{X}(x) = K(2x^2 + \frac{8}{3})\\ \nonumber
+        P_{Y}(y) =  \int \limits_{0}^{2} K(x^2+ y^2) \mathrm{d} x \\\nonumber
+        \Longrightarrow P_{Y}(y) = K(2y^2 + \frac{8}{3}) \nonumber
+    \end{align}
+    \item 
+    \begin{align}
+        P_{r}(0.4<X<0.8, 0.2<Y<0.4) = \int \limits_{0.4}^{0.8} \int \limits_{0.2}^{0.4} f(x,y) \mathrm{d} y \mathrm{d} x \\ \nonumber
+        \Longrightarrow P_{r}(0.4<X<0.8, 0.2<Y<0.4) = 0.037333K \nonumber
+    \end{align}
+    \item Conditional probability density is defined as:\\
+    \begin{align}
+        f_{Y}(y|X = x) = \frac{f_{XY}(x,y)}{f_{X}(x)}\\
+        \rightarrow f_{Y}(y|X = x) = \frac{(x^2 + y^2)}{(2x^2 + \frac{8}{3})} \nonumber\\ 
+        and\\
+        \rightarrow f_{X}(x|Y = y) = \frac{(x^2 + y^2)}{(2y^2 + \frac{8}{3})} \nonumber
+    \end{align}
+
+    \newpage
+    \subsection{Problem 3} % (fold)
+    \label{sub:problem_3}
+    
+    \begin{enumerate}[(a)]
+        \item $\begin{array}{lcr}
+            F(x, y) = \frac{1}{6} xy(x+y) & ; & 0 \leq x \leq 2, 0 \leq y \leq 1\\
+        \end{array}$
+        \begin{enumerate}[(i)]
+            \item
+            \begin{align}
+                F_{Y}(y) = F_{XY}(x=2,y) \nonumber\\ 
+                F_{Y}(y) = \frac{1}{3} (2+y) \nonumber
+            \end{align}
+            \item Joint density function can be obtained from joint cumulative distribution by\\
+            \begin{align}
+                f(x, y) = \frac{\partial ^2 F(x, y)}{\partial x \partial y} \nonumber\\
+                f(x, y) = \frac{\partial ^2 }{\partial x \partial y} (\frac{1}{6} xy(x+y)) \nonumber\\
+                f(x, y) = \frac{1}{3} (x+y) \nonumber
+            \end{align}
+        \end{enumerate}
+        \item If two random variables with joint Normal distribution and they are uncorrelated, they are statistically independent.\\
+        Proof:\\
+        Let $\mathbf{x} = [X, Y]$ is a random vector with random variables X and Y.\\
+        $\mathbf{\mu} = [\mu_{x}, \mu_{y}]$ be the expectations of X and Y.\\
+        and $\mathbf{\Sigma} = [Cov(X_{i}, X_{j})]$ be the covariance matrix.\\
+        Normal distribution is given by
+        \begin{align}
+            f_{\mathbf{x}}(x, y) = \frac{1}{\sqrt{(2\pi)^2 |\Sigma|}} exp(- \frac{1}{2}(\mathbf{x} - \mathbf{\mu})^T \mathbf{\Sigma}^{-1}(\mathbf{x} - \mathbf{\mu}))\\
+            \end{align}
+            With two variables, we have:\\
+            $\mathbf{\mu} = \begin{pmatrix}
+                \mu_x\\
+                \mu_y
+            \end{pmatrix}\\
+            \mathbf{\Sigma} = 
+            \begin{pmatrix}
+                 \sigma_{x}^2 & \rho\sigma_{x}\sigma_{y} \\
+                 \rho\sigma_{x}\sigma_{y} & \sigma_{y}^2
+             \end{pmatrix} $\\
+        Expanding the matrix gives the joint normal distribution as :\\
+        \begin{align}
+            f_{\mathbf{x}}(x, y) = \frac{1}{2\pi\sigma_x\sigma_y \sqrt{1-\rho^2}} exp\left(- \frac{1}{2(1-\rho^2)}\left[\frac{(x-\mu_x)^2}{\sigma_x^2} + \frac{(y-\mu_y)^2}{\sigma_y^2}- \frac{2\rho(x - \mu_x)(y - \mu_y)}{\sigma_x\sigma_y}\right]\right) \nonumber \\
+        \end{align}
+        \newpage
+        Since $X$ and $Y$ are uncorrelated, $\rho = 0$\\
+        \begin{equation}
+            % \Rightarrow
+            f_{\mathbf{x}}(x, y) = \frac{1}{2\pi\sigma_x\sigma_y} exp\left(- \frac{1}{2}\left[\frac{(x-\mu_x)^2}{\sigma_x^2} + \frac{(y-\mu_y)^2}{\sigma_y^2} \right]\right) \nonumber
+        \end{equation}
+        \begin{equation}
+            f_{\mathbf{x}}(x, y) = \left(\frac{1}{\sqrt{2\pi\sigma_x}} exp\left(- \frac{1}{2}\left[\frac{(x-\mu_x)^2}{\sigma_x^2}\right]\right)\right) \left(\frac{1}{\sqrt{2\pi\sigma_y}} exp\left(- \frac{1}{2}\left[\frac{(y-\mu_y)^2}{\sigma_y^2}\right]\right)\right) \nonumber
+        \end{equation}
+        \begin{equation}
+            \Longrightarrow
+            f_{\mathbf{x}}(x, y) = f_{X}(x)f_{Y}(y) \nonumber
+        \end{equation}
+        That proves that uncorrelated variables with joint normal distribution are independent.
+
+        \subsection{Problem 4} % (fold)
+        \label{sub:problem_4}
+        \begin{enumerate}[(a)]
+            \item best prediction of $Y$ is the expectation of Y; $E(Y|X)$\\
+            When the $x$ is unknown:\\
+            \begin{align}
+               E(Y) = \int \limits_y yf_{Y}(y) \mathrm{d} y  \nonumber \\
+               E(Y) =  \int \limits_y y(\frac{1}{4}(\frac{3}{4}y^2 + 1)) \mathrm{d} y  \nonumber \\
+               E(Y) = 1.25
+            \end{align}
+            And at $x=0.8$, the conditional probability is:\\
+            \begin{align}
+                E(Y|X) = \int \limits_y yf_{Y}(y|X=x) \mathrm{d} y \nonumber\\
+                % f_{Y}(y) = \int \limits_x f_{XY}(x, y) \mathrm{d} x \nonumber \\
+                E(Y|X) = \int \limits_y y(\frac{(x^2 + y^2)}{2x^2 + \frac{8}{3}}) \mathrm{d} y \nonumber \\
+                E(Y|X) = \left[ \frac{(x^2y^2/2 + y^4/4)}{2x^2 + \frac{8}{3}}\right]_0^2 \nonumber \\
+                E(Y|X) =  \left[ \frac{(x^2 + 2)}{x^2 + \frac{4}{3}}\right]\nonumber
+            \end{align}
+            and at $x= 0.8$\\
+            $E(Y|X = 0.8) = 0.3243243$
+            
+            \item For two independent random variables,\\
+            \centerline{$E(XY) = E(X)E(Y)$}\\
+            Expanding the given expression\\
+            \begin{align}
+                E(X_1^3(X_2^2 + 3X_3)) &= E(X_1^3X_2^2 + 3X_1^3X_3) \nonumber\\
+                &= E(X_1^3X_2^2) + 3E(X_1^3X_3) \nonumber \\
+                &= E(X_1^3)E(X_2^2) + 3E(X_1^3)E(X_3) \nonumber
+            \end{align}
+            Since unit variance and zero expectation\\
+            \centerline{$E(X_1^3(X_2^2 + 3X_3)) = E(X_1^3)$}\\
+        \end{enumerate}
+        \newpage
+        \subsection{Problem 5} % (fold)
+        \label{sub:proble_5}
+        \begin{enumerate}[(a)]
+            \item The following function returns the covariance matrix of a random vector:\\
+            \begin{lstlisting}
+            # A general function to produce covariance matrix of a n dimensional random vector 
+            covariance <- function(X) {
+                muVec <- colMeans(X);   # find mean of each random vector
+                N <- 1:nrow(x);
+                CovMatrix <- matrix(0, ncol(X), ncol(X));  #initialize to zero
+                for (i in 1:ncol(X)) {   # loop through pair of every random vectors
+                    for (j in 1:ncol(X)) {
+                        for (k in N) {
+                            CovMatrix[i, j] = CovMatrix[i, j] + (X[k, i] - muVec[i])*(X[k, j]-muVec[j]); #keep adding
+                        }
+                        CovMatrix[i, j] = CovMatrix[i,j]/length(N); #divide by size
+                    }
+                }
+                return(CovMatrix);   #return the result
+            }
+            \end{lstlisting}
+            And the given problem can be solved using the above function:\\
+            \begin{lstlisting}
+                # create dataset
+                # sqrt since rnorm has argument standard deviation and given is variance
+
+                X <- rnorm(1000, 1, sqrt(3));
+                Y <- X^2 + 4*X +2;
+                x <- cbind(X, Y);
+
+                # covariance from my function
+                myCov = covariance(x);
+                # covariance from R
+                rCov = cov(x);
+
+                View(myCov);
+                View(rCov);
+            \end{lstlisting}
+            The covariance matrix from the above function is:\\
+            $\begin{pmatrix}
+                2.921442 & 17.86062 \\
+                17.860625 & 125.20517
+            \end{pmatrix}$\\
+            And the covariance using R is:\\
+            $\begin{pmatrix}
+                2.924366 & 17.8785 \\
+                17.878503 & 125.3305
+            \end{pmatrix}$\\
+
+        \item
+        \end{enumerate}
+        
+    \end{enumerate}
+\end{enumerate}
+\end{document}
+

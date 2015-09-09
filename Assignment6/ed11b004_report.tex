@@ -1,0 +1,115 @@
+% @Author: athul
+% @Date:   2014-09-15 12:11:31
+% @Last Modified by:   Athul Vijayan
+% @Last Modified time: 2014-11-13 10:18:43
+
+\documentclass[11pt,paper=a4,answers]{exam}
+\usepackage{graphicx,lastpage}
+\usepackage{subfig}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{upgreek}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[bookmarks]{hyperref}
+\usepackage{censor}
+\usepackage{amsmath}
+\usepackage{amssymb, amsthm}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{enumerate}
+
+\newcommand{\cb}[1]{{\cellcolor{black! 15 }$ #1$}}
+\newcommand{\Oh}{\bm{\mathcal{O}}}
+\newcommand{\cw}[1]{{\cellcolor{black! 35 }$ \color{white} #1$}}
+\censorruledepth=-.2ex
+\censorruleheight=.1ex
+\hyphenpenalty 10000
+\usepackage[paperheight=10.5in,paperwidth=8.27in,bindingoffset=0in,left=0.8in,right=1in,
+top=0.7in,bottom=1in,headsep=.5\baselineskip]{geometry}
+\flushbottom
+\usepackage[normalem]{ulem}
+\renewcommand\ULthickness{2pt}   %%---> For changing thickness of underline
+\setlength\ULdepth{1.5ex}%\maxdimen ---> For changing depth of underline
+\renewcommand{\baselinestretch}{1}
+\pagestyle{empty}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\pagestyle{headandfoot}
+\headrule
+
+\newcommand{\continuedmessage}{%
+\ifcontinuation{\footnotesize continues\ldots}{}%
+ }
+\newcommand{\e}{\mathrm{e}}
+\renewcommand{\v}{\mathrm{v}}
+\newcommand{\q}[1]{\ensuremath{\mathit{q}^{#1}}}
+\runningheader{\footnotesize \today}
+{\footnotesize Applied TSA}
+{\footnotesize Page \thepage\ of \numpages}
+\footrule
+\footer{\footnotesize}
+{}
+{\ifincomplete{\footnotesize section \IncompleteQuestion\ continues
+on the next page\ldots}{\iflastpage{\footnotesize End}{\footnotesize Please go        on to the next page\ldots}}}
+
+\usepackage{cleveref}
+\crefname{figure}{figure}{figures}
+\crefname{question}{question}{questions}
+%==============================================================
+\begin{document}
+
+\noindent
+\begin{minipage}[l]{.1\textwidth}%
+\noindent
+\end{minipage}
+\hfill
+\begin{minipage}[r]{.68\textwidth}%
+\begin{center}
+{\large \bfseries \par
+\Large Applied TSA - Assignment 6 \\[2pt]
+\vspace{6pt}
+\small   \par}
+\end{center}
+\end{minipage}
+\begin{minipage}[l]{.195\textwidth}%
+\noindent
+{\footnotesize}
+\end{minipage}
+\par
+\noindent
+\uline{ED11B004 \hfill \normalsize\emph \hfill       Athul Vijayan}\\
+\begin{questions}
+% ============================== Content starts here
+\question 
+\begin{enumerate}[a.]
+    \item Our model is OLS $y[k] = x^T[k] \theta + \e[k]$. Lets start from sum of squared errors (SSE). here error is the unpredictable part; the white noise signal $\e[k]$.
+    \begin{align*}
+        |\e[k]|^2 &= |y - x^T[k] \theta|^2 \\
+        SSE &= \sum_{k=0}^{N-1} |y - x^T[k] \theta|^2 \\
+        &= \sum_{k=0}^{N-1} (y - x^T[k] \theta)^T (y - x^T[k] \theta)
+    \end{align*}
+    ${SSE\over n-p}$ is the unbiased estimator for variance.
+    $${SSE\over n-p} = \sigma_{\epsilon}^2 = {1 \over n-p} \sum_{k=0}^{N-1} (y - x^T[k] \theta)^T (y - x^T[k] \theta)$$
+    Now taking expectation:
+    Take non vector elements of equation and prove.
+    \begin{align*}
+        E(\sigma_{\epsilon}^2) &= E({1 \over n-p} \sum_{k=0}^{N-1} (y - x^T[k] \theta)^2\\
+        &= {1 \over n-p}(E\left(\sum_{i=0}^{N-1} (X_i - M)^2\right)) \\
+        &= {1 \over n-p}( \sum_{i=0}^{N-1} (\sigma^2 + \mu^2) - n \left(\frac{\sigma^2}{n} + \mu^2\right) )\\
+        &= {1 \over n-p}(n (\sigma^2 + \mu^2) -n \left(\frac{\sigma^2}{n} + \mu^2\right)) \\
+        &= \sigma^2
+    \end{align*}
+    \item An AR(p) model can be written as
+    $$ \v[k] + a_1 \v[k-1] + \cdots + a_p \v[k-p] = \e[k] $$
+    Where $\e[k] \sim \mathcal{N}(0, \sigma_{e} ^2)$.\\
+    
+\end{enumerate}
+
+
+ % ============================== Content ends here
+\end{questions}
+% \begin{center}
+% \rule{.7\textwidth}{1pt}
+% \end{center}
+\end{document} 

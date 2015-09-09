@@ -1,0 +1,166 @@
+% @Author: Athul Vijayan
+% @Date:   2014-10-17 14:48:38
+% @Last Modified by:   Athul Vijayan
+% @Last Modified time: 2014-10-17 22:15:21
+
+
+\documentclass[11pt,paper=a4,answers]{exam}
+\usepackage{graphicx,lastpage}
+\usepackage{subfig}
+\usepackage[table]{xcolor}
+\usepackage{multirow}
+\usepackage{upgreek}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[bookmarks]{hyperref}
+\usepackage{censor}
+\usepackage{amsmath}
+\usepackage{amssymb, amsthm}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{enumerate}
+
+\newcommand{\cb}[1]{{\cellcolor{black! 15 }$ #1$}}
+\newcommand{\cw}[1]{{\cellcolor{black! 35 }$ \color{white} #1$}}
+\newcommand{\lh}[0]{\hat{\lambda}}
+\censorruledepth=-.2ex
+\censorruleheight=.1ex
+\hyphenpenalty 10000
+\usepackage[paperheight=10.5in,paperwidth=8.27in,bindingoffset=0in,left=0.8in,right=1in,
+top=0.7in,bottom=1in,headsep=.5\baselineskip]{geometry}
+\flushbottom
+\usepackage[normalem]{ulem}
+\renewcommand\ULthickness{2pt}   %%---> For changing thickness of underline
+\setlength\ULdepth{1.5ex}%\maxdimen ---> For changing depth of underline
+\renewcommand{\baselinestretch}{1}
+\pagestyle{empty}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\pagestyle{headandfoot}
+\headrule
+
+\newcommand{\continuedmessage}{%
+\ifcontinuation{\footnotesize continues\ldots}{}%
+ }
+\runningheader{\footnotesize \today}
+{\footnotesize Applied TSA}
+{\footnotesize Page \thepage\ of \numpages}
+\footrule
+\footer{\footnotesize}
+{}
+{\ifincomplete{\footnotesize section \IncompleteQuestion\ continues
+on the next page\ldots}{\iflastpage{\footnotesize End}{\footnotesize Please go        on to the next page\ldots}}}
+
+\usepackage{cleveref}
+\crefname{figure}{figure}{figures}
+\crefname{question}{question}{questions}
+%==============================================================
+\begin{document}
+
+\noindent
+\begin{minipage}[l]{.1\textwidth}%
+\noindent
+\end{minipage}
+\hfill
+\begin{minipage}[r]{.68\textwidth}%
+\begin{center}
+{\large \bfseries \par
+\Large Time series Assignment 4 \\[2pt]
+\vspace{6pt}
+\small   \par}
+\end{center}
+\end{minipage}
+\begin{minipage}[l]{.195\textwidth}%
+\noindent
+{\footnotesize}
+\end{minipage}
+\par
+\noindent
+\uline{CH5350 \hfill \normalsize\emph \hfill       Athul Vijayan (ED11B004)}\\
+\begin{questions}
+% ============================== Content starts here
+\question coding
+\question 
+\begin{enumerate}[a.]
+    \item First we find ccvf $\sigma_{yu}(l)$ and then find psd.\\
+    Here, $v[k]$ is net effect of disturbances and measurement error, also assumed to be stationary. we assume this as an ARMA process $v[k] = G(q^{-1})e[k]$. where $e[k]$ is GWN
+    \begin{align}
+        \sigma_{yu}(l) &= cov(y[k+l], u[k]) \\
+        &= cov(x[k+l] + v[k+l], u[k]) \\
+        &= cov(H(q^{-1})u[k+l] + G(q^{-1})e[k+l], u[k])
+    \end{align}
+We know, $\sigma_{eu}[l] = 0$ for $l>0$
+    \begin{align*}
+        \sigma_{yu}(l) &= H(q^{-1})\sigma_{uu}[l] + 0 \qquad \text{for l } > 0
+    \end{align*}
+    Now to find psd,
+    $$\gamma_{yu}(\omega) = {1 \over 2\pi} \sum_{l=-\infty}^{+\infty} H(q^{-1})\sigma_{uu}[l] \mathrm{e} ^{-j\omega t}$$
+\item coherency is
+\begin{align*}
+    \kappa_{yu}(\omega) &= {\gamma_{yu}(\omega) \over \sqrt{\gamma_{yy}(\omega)\gamma_{uu}(\omega)}} \\
+    % &= {\gamma_{yu}(\omega) \over \sqrt{df}}
+\end{align*}
+
+\item squared coherency
+\begin{align*}
+    |\kappa_{yu}(\omega)|^2 &= \frac{1}{1 + {\gamma_{vv}(\omega) \over \gamma_{xx}(\omega)}}\\
+    &= \frac{1}{1 + {|G(\mathrm{e} ^{j\omega})|^2 \sigma_e^2 \over |H(\mathrm{e} ^{j\omega})|^2 \gamma_{uu}(\omega)}} \\
+    &= \frac{1}{1 + {1 \over SNR(\omega)}}
+\end{align*}
+\end{enumerate}
+
+\question coding
+
+\question Sample mean estimator $\theta = \mu$ is given by
+$$ \hat{\mu} = {1 \over N} \sum_{k=0}^{N-1} v[k] $$
+Now variance of estimator is defined as $\mathbb{E}[ (\hat{\theta} - \mathbb{E}(\hat{\theta}))^2 ]$. In which $\mathbb{E}(\hat{\theta}) = \mu = 0$ (assumed true mean is $0$).
+\begin{align*}
+    var(\hat{\mu}) &= \mathbb{E} \left[ \left({1 \over N} \sum_{k=0}^{N-1} v[k] \right)^2\right ] \\
+    &= \mathbb{E} \left[ \left({1 \over N} \sum_{k=0}^{N-1} v[k] \right) \left({1 \over N} \sum_{j=0}^{N-1} v[j] \right)\right ]\\
+    &= {1 \over N^2} \mathbb{E} \left[ v[0]^2 + v[1]^2+\cdots+v[n-1]^2 + 2v[0](v[1] +\cdots + v[n-1]) + 2v[1](v[2]+ \cdots + v[n-1]) + \cdots + 2v[n-2]v[n-1])  \right]\\
+    &= {1 \over N^2} \left[ N \sigma_{vv}[0] + 2N \sum_{l=1}^{N-1} \sigma_{vv}[l] - 2 \sum_{l=1}^{N-1} |l| \sigma_{vv}[l]\right] \\
+    &= {1 \over N} \left[ \sigma_{vv}[0] + 2 \sum_{l=1}^{N-1} \left(1 - {|l| \over N}\right)\sigma_{vv}[l]\right]
+\end{align*}
+% &= {1 \over N^2} \left[ N \sigma_{vv}[0] + 2 \sum_{l=1}^{N-1} \sigma_{vv}[l]
+\question Since the process is white noise, we can write joint likelihood as product of marginal likelihoods.
+\begin{enumerate}[a.]
+    \item  So, for estimating $\lambda$ from $N$ observations, likelihood can be written as
+$$\mathrm{L}(\lambda) = \prod _{i=0}^{N-1} \lambda \mathrm{e} ^{-\lambda y}$$
+and $log$ likelihood is given as
+$$ l(\lambda) = \sum_{i=0}^{N-1} \ln \lambda -\lambda y$$
+And maximum likelihood estimator is:
+\begin{align}
+    0 &= \sum_{i=0}^{N-1} {1 \over \lh} - y \\
+    \Rightarrow {N \over \lh} &= \sum_{i=0}^{N-1} y\\
+    \lh &= {N \over \sum_{i=0}^{N-1} y}
+\end{align}
+Fishers Information of this is
+\begin{align*}
+    \mathrm{I}(\lambda) &= \mathbb{E}\left[\frac{\partial ^2 l(\lambda)}{\partial \lambda ^2} \right] \\
+    &= \mathbb{E} \left[\sum_{i=0}^{N-1} {-1 \over \lambda ^2} \right] \\
+    &= \mathbb{E} \left[ {N \over \lambda ^2} \right] \\
+    &= {N \over \lambda ^2}
+\end{align*}
+From C-R Bound, efficiency of estimator is defined as 
+$$e(\hat{\theta}) = \frac{I(\theta)^{-1}}{{\rm var}(\hat{\theta})}$$
+Here, 
+\begin{align*}
+    e(\hat{\lambda}) = \frac{\lambda ^2}{N \times \mathbb{E}\left(({N \over \sum_{i=0}^{N-1} y} - \mathrm{E}(\hat{\lambda}))^2\right)}
+\end{align*}
+
+
+\item for parameter $\theta = {1 \over \lambda}$, log likelihood can be written as
+$$l(\theta) = \sum_{i=0}^{N-1} -\ln \theta - {y \over \theta}$$
+and estimate is
+\begin{align}
+    \hat{\theta} = {1 \over N} \sum_{i=0}^{N-1} y 
+\end{align}
+which is sample mean. We know that sample mean is efficient estimate.
+
+\end{enumerate}
+ % ============================== Content ends here
+\end{questions}
+% \begin{center}
+% \rule{.7\textwidth}{1pt}
+% \end{center}
+\end{document} 
